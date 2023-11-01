@@ -1,0 +1,17 @@
+html,
+body {
+  margin: 0;
+}
+main {
+  display: flex;
+}
+#list {
+  background-color: red;
+  height: 100px;
+  flex: 8;
+}
+#form {
+  background-color: aqua;
+  height: 100px;
+  flex: 4;
+}
