@@ -4,14 +4,13 @@ body {
 }
 main {
   display: flex;
+  height: calc(100vh - 37px);
 }
 #list {
   background-color: red;
-  height: 100px;
   flex: 8;
 }
 #form {
   background-color: aqua;
-  height: 100px;
   flex: 4;
 }
