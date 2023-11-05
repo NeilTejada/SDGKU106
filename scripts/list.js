@@ -14,7 +14,25 @@ function toggleVisibility() {
 }
 
 function displayTask(task) {
-  let taskToDisplay = `<h3>${task.title}</h3>`;
+  let taskToDisplay = `<div class="task-container">
+  <div class="task-column">
+    <div class="task"style="border-color:${task.color}>
+      <h3>${task.title}</h3>
+      <h3>${task.description}</h3>
+    </div>
+  </div>
+  <div class="task-column">
+    <label class="status">${task.status}</label>
+  </div>
+  <div class="task-column">
+    <div class="date-budget">
+      <label>${task.startDate}</label>
+      <label>${task.budget}</label>
+    </div>
+  </div>
+</div>
+`;
+
   $(".pending-task").append(taskToDisplay);
 }
 
@@ -43,9 +61,66 @@ function saveTask() {
   console.log(taskToSave);
 
   //save to server
+  $.ajax({
+    type: "POST",
+    url: "http://fsdiapi.azurewebsites.net/api/tasks/",
+    data: JSON.stringify(taskToSave),
+    contentType: "application/json",
+    success: function (response) {
+      console.log(response);
+    },
+    error: function (error) {
+      console.log(error);
+    },
+  });
 
   //display the task
   displayTask(taskToSave);
+  clearForm();
+}
+
+function loadTask() {
+  $.ajax({
+    type: "GET",
+    url: "http://fsdiapi.azurewebsites.net/api/tasks",
+    success: function (response) {
+      let data = JSON.parse(response);
+      console.log(data);
+
+      //this pulls all task from name in task.name==""
+      // for (let i = 0; i < data.length; i++) {
+      //   let task = data[i];
+      //   if (task.name == "Adrian") {
+      //     displayTask(task);
+      //   }
+      // }
+    },
+    error: function (error) {
+      console.log(error);
+    },
+  });
+}
+
+function clearForm() {
+  $("#txtTitle").val("");
+  $("#txtDescription").val("");
+  $("#selectColor").val("#000000"); //sets the default color to black
+  $("#selectDateTime").val("");
+  $("#selectStatus").val("");
+  $("#txtBudget").val("");
+}
+
+function testRequest() {
+  $.ajax({
+    type: "GET",
+    url: "http://fsdiapi.azurewebsites.net",
+    success: function (response) {
+      console.log(response);
+    },
+    error: function (error) {
+      console.log(error);
+    },
+  });
 }
 
 function toggleImportant() {
@@ -63,7 +138,7 @@ function toggleImportant() {
 
 function init() {
   //load data
-
+  loadTask();
   //hook events
   $("#btnSave").click(saveTask);
   $("#iconImportant").click(toggleImportant);

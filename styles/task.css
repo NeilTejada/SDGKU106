@@ -14,3 +14,15 @@ main {
   background-color: aqua;
   flex: 4;
 }
+.task-container {
+  display: flex;
+  justify-content: space-between; /* Adjust this property to control the space between columns */
+}
+
+.task-column {
+  flex: 1; /* This will make each column take an equal amount of space */
+  padding: 10px;
+  border: 1px solid #ccc; /* Add borders to separate the columns */
+  margin: 5px;
+  box-sizing: border-box;
+}
