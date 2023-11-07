@@ -7,22 +7,16 @@ main {
   height: calc(100vh - 37px);
 }
 #list {
-  background-color: red;
-  flex: 8;
+  flex: 6;
 }
 #form {
-  background-color: aqua;
-  flex: 4;
+  flex: 6;
 }
-.task-container {
-  display: flex;
-  justify-content: space-between; /* Adjust this property to control the space between columns */
+.task .label {
+  font-weight: normal; /* Make labels not bold */
 }
 
-.task-column {
-  flex: 1; /* This will make each column take an equal amount of space */
-  padding: 10px;
-  border: 1px solid #ccc; /* Add borders to separate the columns */
-  margin: 5px;
-  box-sizing: border-box;
+.task h3,
+.task p {
+  font-weight: bold; /* Make input values bold */
 }

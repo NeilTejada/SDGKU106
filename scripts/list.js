@@ -14,24 +14,17 @@ function toggleVisibility() {
 }
 
 function displayTask(task) {
-  let taskToDisplay = `<div class="task-container">
-  <div class="task-column">
-    <div class="task"style="border-color:${task.color}>
-      <h3>${task.title}</h3>
-      <h3>${task.description}</h3>
+  let taskToDisplay = `
+    <div class="task-container">
+      <div class="task" style="border-color: ${task.color};">
+        <h3 class="label">Title: ${task.title}</h3>
+        <p class="label">Description: ${task.description}</p>
+        <p class="label">Status: ${task.status}</p>
+        <p class="label">Start Date: ${task.startDate}</p>
+        <p class="label">Budget: ${task.budget}</p>
+      </div>
     </div>
-  </div>
-  <div class="task-column">
-    <label class="status">${task.status}</label>
-  </div>
-  <div class="task-column">
-    <div class="date-budget">
-      <label>${task.startDate}</label>
-      <label>${task.budget}</label>
-    </div>
-  </div>
-</div>
-`;
+  `;
 
   $(".pending-task").append(taskToDisplay);
 }
@@ -136,6 +129,14 @@ function toggleImportant() {
   }
 }
 
+function deleteTask() {
+  console.log("Deleting...");
+
+  const deleteAll = $(".task-container");
+
+  deleteAll.find(".task").remove();
+}
+
 function init() {
   //load data
   loadTask();
@@ -143,6 +144,7 @@ function init() {
   $("#btnSave").click(saveTask);
   $("#iconImportant").click(toggleImportant);
   $("#btnDetails").click(toggleVisibility);
+  $("#btnDelete").click(deleteTask);
 }
 
 window.onload = init;
